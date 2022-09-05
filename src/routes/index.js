@@ -15,9 +15,11 @@ router.get('/',async (req,res,next)=>{
     try {
         const arrayQuestions = await Question.find();
         console.log(arrayQuestions)
+        
         res.render('index', {
             arrayQuestions: arrayQuestions
         })
+        
     } catch (error) {
         console.log(error)
     }
@@ -54,6 +56,42 @@ router.get('/logout',(req,res,next)=>{
         });
      
 })
+router.get('/search/:title', async(req, res) => {
+    const title = req.params.title
+    console.log(title)
+    try {
+        const arrayQuestions = await Question.find({ title: title })
+        console.log(arrayQuestions)
+        console.log(arrayQuestions.length)
+        res.render('index', {
+            arrayQuestions: arrayQuestions
+        }
+        )
+    } catch (error) {
+        console.log('error', error)
+        
+    }
+})
+
+router.get('/questions',async(req,res,next)=>{
+    try {
+    const user = require('../index')
+    const email=user.email
+    console.log("email"+email)
+
+    
+        const arrayQuestions = await Question.find({ email: email })
+        console.log(arrayQuestions)
+        console.log(arrayQuestions.length)
+        res.render('index', {
+            arrayQuestions: arrayQuestions
+        }
+        )
+    } catch (error) {
+        console.log('error', error)
+        res.render('signin')
+    }
+})
 
 //Validamos que no se pueda acceder a las rutas protegidas
 router.use((req,res,next)=>{
@@ -62,22 +100,7 @@ router.use((req,res,next)=>{
 });
 
 
-router.get('/questions',async (req,res,next)=>{
-    try {
-        const arrayQuestions = await Question.findOne({ email: 'alex@hotmail.com' });
-        console.log(arrayQuestions)
-        res.render('questions', {
-            arrayQuestions: arrayQuestions,
-            error: false
-        })
-    } catch (error) {
-        console.log(error)
-        res.render('questions', {
-            error: true,
-            mensaje: 'No se encuentra el documento...'
-        })
-    }
-})
+
 
 //Registrar preguntas
 router.get('/profile',(req,res,next)=>{
@@ -94,7 +117,7 @@ router.post('/profile', async (req, res) => {
         date:date
     }
     console.log(questionObj);
-    res.render('questions');
+    res.render('profile');
     try {
         const question = new Question(questionObj);
         await question.save();

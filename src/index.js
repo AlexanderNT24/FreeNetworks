@@ -47,7 +47,7 @@ app.use(session({
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-
+let userglobal='';
 app.use((req,res,next)=>{
     //Declaramos una variable accesible desde toda la aplicación con app.locals
     app.locals.signUpMessage=req.flash('signUpMessage');
@@ -55,6 +55,8 @@ app.use((req,res,next)=>{
     app.locals.title="Free Networks Question";
     //La autenticación nos devuelve un usuario
     app.locals.user=req.user;
+    userglobal=req.user;
+    module.exports=userglobal;
     //Callback para seguir
     next();
 
