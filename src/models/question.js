@@ -9,7 +9,8 @@ const userSchema=new Schema({
     email:String,
     title:String,
     question:String,
-    date:Date
+    date:Date,
+    responses:Object
 });
 
 

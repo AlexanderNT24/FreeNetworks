@@ -14,10 +14,9 @@ const Question=require('../models/question');
 router.get('/',async (req,res,next)=>{
     try {
         const arrayQuestions = await Question.find();
-        console.log(arrayQuestions)
-        
         res.render('index', {
-            arrayQuestions: arrayQuestions
+            arrayQuestions: arrayQuestions,
+            userQuestion:false
         })
         
     } catch (error) {
@@ -64,7 +63,8 @@ router.get('/search/:title', async(req, res) => {
         console.log(arrayQuestions)
         console.log(arrayQuestions.length)
         res.render('index', {
-            arrayQuestions: arrayQuestions
+            arrayQuestions: arrayQuestions,
+            userQuestion:false
         }
         )
     } catch (error) {
@@ -78,13 +78,12 @@ router.get('/questions',async(req,res,next)=>{
     const user = require('../index')
     const email=user.email
     console.log("email"+email)
-
-    
         const arrayQuestions = await Question.find({ email: email })
         console.log(arrayQuestions)
         console.log(arrayQuestions.length)
         res.render('index', {
-            arrayQuestions: arrayQuestions
+            arrayQuestions: arrayQuestions,
+            userQuestion:true
         }
         )
     } catch (error) {
@@ -100,8 +99,6 @@ router.use((req,res,next)=>{
 });
 
 
-
-
 //Registrar preguntas
 router.get('/profile',(req,res,next)=>{
     res.render('profile');
@@ -114,7 +111,19 @@ router.post('/profile', async (req, res) => {
         email:body.email,
         title:body.title,
         question:body.question,
-        date:date
+        date:date,
+        responses:[{
+            email:'alex@hotmail.com',
+            response:'respuesta',
+            date:date
+        },{
+            email:'alex2@hotmail.com',
+            response:'respuesta2',
+            date:date
+        }
+            
+    ]
+        
     }
     console.log(questionObj);
     res.render('profile');
