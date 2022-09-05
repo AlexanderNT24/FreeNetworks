@@ -1,0 +1,42 @@
+<%- layout('layouts/main.ejs')%>
+<style>
+    .card {
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    }
+   
+</style>
+<div class="col d-flex justify-content-center">
+    <div class="row col-sm-10">
+        <div class="col">
+            <div class="card col-md-4 offset-md-4 text-center" style="padding-left: 5px; padding-right: 5px;padding-bottom: 5px;">
+                <div style="height:10px;width:100%"></div>
+                <div class="cardbody">
+                    <div class="card-header">
+                        <h3>Inicio</h3>
+                    </div>
+                    <form action="/signin" method="post">
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Correo:" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" placeholder="Contraseña"
+                                class="form-control">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block mt-4">
+                            Iniciar Sesión
+                        </button>
+                    </form>
+                    <div style="height:10px;width:100%"></div>
+                    
+                    <div>
+                        <hr>
+                        <a class="btn btn-success" href="/signup"  style="width:50%">Crear usuario</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
