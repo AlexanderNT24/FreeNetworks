@@ -13,6 +13,8 @@ const passport=require('passport');
 const session=require('express-session');
 //Llamamos a conect falsh
 const flash=require('connect-flash');
+//Llamamos a body parser
+const bodyParser = require('body-parser')
 
 //Asignamos a un objeto express()
 const app=express();
@@ -21,6 +23,8 @@ app.use( express.static( "public" ) );
 require('./database');
 require('./passport/local-auth');
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 //Configuraciones
 //Como node puede tener compliaciones al encontrar la ruta donde se va a iniciar el proyecto, uso el modulo path para asignarlo y hacelo multiplataforma
 app.set('views',path.join(__dirname,'views'));

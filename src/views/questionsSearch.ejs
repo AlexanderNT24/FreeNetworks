@@ -1,0 +1,14 @@
+<%- layout('layouts/main.ejs')%>
+<tr>
+    <th scope="row"><%= question.id %></th>
+    <td><%= question.email %> </td>
+    <td><%= question.question %></td>
+    <td>
+      <a
+        class="btn btn-warning btn-sm"
+        href="question/<%= question.id %>"
+      >
+        Editar
+      </a>
+    </td>
+  </tr>

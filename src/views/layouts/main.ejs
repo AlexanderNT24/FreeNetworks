@@ -27,7 +27,6 @@
                     Yo
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#"></a></li> 
                   <li><a class="dropdown-item" href="/profile"><i class='bx bxs-user' ></i> Perfil</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="/questions"><i class='bx bxs-chat' ></i> Mis preguntas</a></li>
@@ -45,7 +44,7 @@
             
               <% }%>
             </ul>
-            <form class="d-flex" role="search">
+            <form action="/questionSearch" method="post" class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Buscar una pregunta" aria-label="Search">
               <button class="btn btn-outline-success" type="submit"><i class='bx bxs-send' ></i></button>
             </form>
