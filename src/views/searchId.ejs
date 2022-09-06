@@ -1,0 +1,28 @@
+<%- layout('layouts/main.ejs')%>
+<center>
+  
+  <div class="d-inline-flex p-2">      
+    <div class="card">
+   <h5 class="card-header"><%= question.title %></h5>
+   <div class="card-body">
+     <p class="card-text"><%= question.question %></p>
+     <footer class="blockquote-footer">Por <%= question.email %> el <%= question.date %></footer>
+     <%if (user){ %>
+           
+        <hr>
+        <form action="/searchId/<%= question.id %>"  method="post">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text">
+          <textarea name="response" class="form-control" aria-label="With textarea"></textarea>
+          <button class="btn btn-outline-success" type="submit"><i class='bx bxs-send' > Postear</i></button>
+        </div>
+      </div>
+        </form>
+        
+  
+      <%}  %>
+   </div>
+   </div>
+  </div>
+</center>

@@ -14,11 +14,20 @@ const Question=require('../models/question');
 router.get('/',async (req,res,next)=>{
     try {
         const arrayQuestions = await Question.find();
+    
         console.log(arrayQuestions)
+        //Ordenamos
+        const orderArray=arrayQuestions.sort((a,b)=>{
+            return new Date(b.date) - new Date(a.date);
+        })
+
+
         res.render('index', {
-            arrayQuestions: arrayQuestions.reverse(),
+            arrayQuestions: orderArray,
             userQuestion:false
         })
+        
+        
         
     } catch (error) {
         console.log(error)
@@ -56,6 +65,48 @@ router.get('/logout',(req,res,next)=>{
         });
      
 })
+router.get('/searchId/:id', async(req, res) => {
+    const id = req.params.id
+    try {
+        const question = await Question.findOne({ _id: id })
+        console.log(question)
+        res.render('searchId', {
+            question: question
+        })
+    } catch (error) {
+        console.log('error', error)
+        
+    }
+})
+router.post('/searchId/:id', async(req, res) => {
+    try {
+    const user = require('../index');
+    const email=user.email;
+    const id = req.params.id;
+    const response = req.body.response;
+    const arrayQuestions = await Question.findOne({ _id: id })
+    console.log(arrayQuestions)
+    const date = new Date();
+    const newObjToInsert={
+        email:email,
+        response:response,
+        date:date
+    }
+   
+    arrayQuestions.responses.push(newObjToInsert)
+    console.log(arrayQuestions.responses)
+
+    await Question.findByIdAndUpdate(id, arrayQuestions, { useFindAndModify: false })
+    res.render('profile');
+    
+    } catch (error) {
+        console.log(error)
+        
+    }
+    
+    
+});
+
 router.get('/search/:title', async(req, res) => {
     const title = req.params.title
     console.log(title)
@@ -113,17 +164,7 @@ router.post('/profile', async (req, res) => {
         title:body.title,
         question:body.question,
         date:date,
-        responses:[{
-            email:'alex@hotmail.com',
-            response:'respuesta',
-            date:date
-        },{
-            email:'alex2@hotmail.com',
-            response:'respuesta2',
-            date:date
-        }
-            
-    ]
+        responses:[]
         
     }
     console.log(questionObj);
@@ -141,8 +182,6 @@ router.post('/profile', async (req, res) => {
     
     
 });
-
-
 
 //Funcion para validar si estas autenticado
 function isAuthenticated(req,res,next) {

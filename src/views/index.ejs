@@ -8,8 +8,11 @@
        <div class="card-body">
          <p class="card-text"><%= question.question %></p>
          <footer class="blockquote-footer">Por <%= question.email %> el <%= question.date %></footer>
-         
+         <%if (user){ %>
+          <a href="searchId/<%= question.id %>" class="btn btn-success"><i class='bx bxs-message-alt-add'></i> Responder</i></a>
+          <%}  %>
        </div>
+         
        <div class="accordion accordion-flush" id="accordionFlushExample">
            <div class="accordion-item">
              <h2 class="accordion-header" id="flush-headingOne">
@@ -17,28 +20,29 @@
                  Respuestas
                </button>
              </h2>
+             <%question.responses.forEach(response => {  %>
              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                <div>
-                   <div class="accordion-body">Contenido</div>
-                   <footer class="blockquote-footer">Por </footer>
-                   <% if(userQuestion) {%> 
-                   <button type="button" class="btn btn-success"><i class='bx bxs-like' ></i></button>
-                <button type="button" class="btn btn-danger"><i class='bx bxs-dislike' ></i></button>
-                <% } %>
-              </div>
+                
+                  <div class="accordion-body"><%= response.response%></div>
+                  <footer class="blockquote-footer"><%= response.email%> </footer>
+                  <% if(userQuestion) {%> 
+                  <button type="button" class="btn btn-success"><i class='bx bxs-like' ></i></button>
+               <button type="button" class="btn btn-danger"><i class='bx bxs-dislike' ></i></button>
+               <% } %>
+             </div>
+                 
+               
+                  
                
              </div>
-       
+             <% }) %> 
            </div>
       
          
          </div>
      </div></div>
      <hr>
-
-       
-          
-         
     <% }) %>
 <% } %>
  
