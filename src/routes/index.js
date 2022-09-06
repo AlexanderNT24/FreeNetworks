@@ -158,9 +158,11 @@ router.get('/profile',(req,res,next)=>{
 router.post('/profile', async (req, res) => {
     const body = req.body;
     const date = new Date();
+    const user = require('../index')
+    const email=user.email
     console.log(body);
     questionObj={
-        email:body.email,
+        email:email,
         title:body.title,
         question:body.question,
         date:date,

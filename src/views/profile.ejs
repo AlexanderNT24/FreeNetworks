@@ -2,18 +2,25 @@
 
 <div class="container">
     <form action="/profile" method="post">
+        <h1>Usuario: <%=user.email %></h1>
          <div class="card">
-            <input type="text" name="email" value=<%=user.email %> readonly>
+            
             <h5 class="card-header">Crear pregunta</h5>
-            <div class="input-group">
-                <input class="form-control me-2"  placeholder="Titulo" name="title">
-             <div class="input-group mb-3">
-                 
-                 <hr>
-                 <textarea name="question" class="form-control" aria-label="With textarea"></textarea>
-                 <button class="btn btn-outline-success" type="submit"><i class='bx bxs-send' ></i></button>
-               </div>
-           </div>  
+            <div class="container" style="padding: 15px;">
+                <div class="margin-bottom:10px;">
+                    <label>Titulo:</label>
+                    <input class="form-control me-2"  placeholder="ej: Nueva pregunta" name="title">
+                </div>
+                <div class="margin-bottom:10px;">
+                    <label>Descripción:</label>
+                    <textarea name="question" class="form-control" aria-label="With textarea"></textarea>
+                </div>
+                <div class="margin-bottom:10px;">
+                    <button style="width: 100%;" class="btn btn-outline-success" type="submit">Guardar <i class='bx bxs-send' ></i></button>
+               
+                </div>
+            </div>
+           
           </div>
         
     </form>
