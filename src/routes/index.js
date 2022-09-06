@@ -14,8 +14,9 @@ const Question=require('../models/question');
 router.get('/',async (req,res,next)=>{
     try {
         const arrayQuestions = await Question.find();
+        console.log(arrayQuestions)
         res.render('index', {
-            arrayQuestions: arrayQuestions,
+            arrayQuestions: arrayQuestions.reverse(),
             userQuestion:false
         })
         

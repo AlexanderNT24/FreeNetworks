@@ -44,14 +44,22 @@
             
               <% }%>
             </ul>
-            <form class="d-flex">
-              <input  class="form-control me-2" type="search" placeholder="Buscar una pregunta" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit"><i class='bx bxs-send' ></i></button>
-            </form>
+            <li class="d-flex">
+              <input id="path" class="form-control me-2" type="search" placeholder="Buscar una pregunta" aria-label="Search">
+              <button class="btn btn-outline-success"><i class='bx bxs-send' onclick="search()"></i></button>
+            </li>
           </div>
         </div>
       </nav>
       <hr>
+      <script>
+        function search(){
+          
+          let path=document.getElementById("path").value;
+          console.log(path)
+          window.location.href='http://localhost:3000/search/'+path;
+        }
+      </script>
     <div class="container">
         <%if(signUpMessage.length>0){%>
             <div class="alert alert-danger">
